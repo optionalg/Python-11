@@ -6,3 +6,12 @@
 <div> - A section in the HTML document 
       - div stands for division i.e. section
       - Often used with the 'align' attribute i.e. alignment of content in the <div> environment
+
+<span> - Tag for editing certain parts of text, or grouping text together within a line
+       - i.e. putting a phrase into italics or bold in a sentence, or colouring a word
+       
+<td>   - A standard cell in an HTML table
+
+<th>   - Headers in a HTML table
+
+<tr>   - Table row in a HTML table

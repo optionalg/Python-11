@@ -1,0 +1,8 @@
+<a> - Defines a hyperlink 
+    - Often used with the 'href' attribute
+    
+\href - Specific the URL of the page the link goes to
+
+<div> - A section in the HTML document 
+      - div stands for division i.e. section
+      - Often used with the 'align' attribute i.e. alignment of content in the <div> environment

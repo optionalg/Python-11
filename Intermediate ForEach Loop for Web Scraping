@@ -1,0 +1,98 @@
+# Installation
+
+import urllib  #Access the internet and make network requests
+import re #
+
+# Copy main URL
+
+e.g. http://mosques.muslimsinbritain.org/show-browse.php?town=Barry&map=1#/town/Barry
+
+# Template URL
+
+http://mosques.muslimsinbritain.org/show-browse.php?[TOWN]=Barry&map=1#/town/[TOWN]
+
+# Make URL a vector/variable
+
+url = "http://mosques.muslimsinbritain.org/show-browse.php?[TOWN]=Barry&map=1#/town/[TOWN]"
+
+
+# Create Vector Identify iterations ('i')
+  # Iterations, in this case, will refer to the towns in the Mosque directory.
+  # For instance, each 'i' will refer to a town e.g. Aberdare, Ely, Yeovil.
+  # Each foreach loop, therefore, will extract information for each of the towns 
+
+towns = ["Aberdare", "Aberdeen", "Aberystwyth", "Abingdon", "Accrington", "Airdrie", "Aldershot", "Alloa", "Alnwick", "Ashford", 
+        "Ashton-under-Lyne", "Aylesbury", "Ballyhaunis", "Banbury", "Bangor", "Barnoldswick", "Barnsley", "Barnstaple", "Barry", 
+        "Basildon", "Basingstoke", "Bath", "Bathgate", "Batley", "Bedford", "Belfast", "Bexhill-on-Sea", "Bicester", "Billericay",
+        "Birkenhead", "Birmingham", "Bishops+Stortford", "Blackburn", "Blackpool", "Blyth", "Bognor+Regis", "Bolton", "Borehamwood", 
+        "Boston", "Bournemouth", "Bracknell", "Bradford", "Braintree", "Brentwood", "Bridgend", "Bridgwater", "Brighton", "Bristol",
+        "Bromley", "Burnley", "Burton+On+Trent", "Bury", "Caerphilly", "Camberley", "Cambridge", "Cannock", "Canterbury", "Canvey+Island",
+        "Cardiff", "Carlisle", "Carlow", "Carmarthen", "Cavan", "Chatham", "Chelmsford", "Cheltenham", "Chesham", "Chester", "Chesterfield",
+        "Chichester", "Chipping+Norton", "Chorley", "Cleethorpes", "Clitheroe", "Colchester", "Coleraine", "Colne", "Conway", "Corby", "Cork",
+        "Coventry", "Craigavon", "Craven+Arms", "Crawley", "Crewe", "Crowborough", "Darlington", "Dartford", "Darwen", "Daventry", "Derby", 
+        "Dewsbury", "Didcot", "Doncaster", "Dorchester", "Dorking", "Douglas", "Dublin", "Dudley", "Dumfries", "Dundalk", "Dundee", 
+        "Dunfirmline", "Durham", "Eastbourne", "Edinburgh", "Elgin", "Elstree+and+Borehamwood", "Ely", "Ennis", "Epsom", "Exeter", "Falkirk",
+        "Fleetwood", "Folkestone", "Galashiels", "Galway", "Gateshead", "Gatwick", "Gerrards+Cross", "Gillingham", "Glasgow", "Glastonbury", 
+        "Glenrothes", "Gloucester", "Grantham", "Grays", "Great+Yarmouth", "Grimsby", "Guildford", "Halesowen", "Halifax", "Hamilton", "Harlow",
+        "Harpenden", "Hartlepool", "Hastings", "Hatfield", "Haverfordwest", "Haywards+Heath", "Hemel Hempstead", "Hereford", "Hertford",
+        "High+Wycombe", "Hitchin", "Horley", "Horsham", "Hucknall", "Huddersfield", "Huntingdon", "Hyde", "Inverness", "Ipswich", "Keighley",
+        "Keswick", "Kettering", "Kidderminster", "Kilkenny", "Killarney", "Kilmarnock", "Kingston+on+Hull", "Kirkcaldy", "Lampeter", 
+        "Lancaster", "Leamington+Spa", "Leatherhead", "Leeds", "Leicester", "Leigh", "Leven", "Lichfield", "Limerick", "Lincoln", "Liverpool",
+        "Livingston", "Llanelli", "London", "Loughborough", "Loughton", "Lucan", "Luton", "M1+Motorway", "M4+Motorway", "M6+Motorway", 
+        "M61+Motorway", "Macclesfield", "Maidenhead", "Maidstone", "Maldon", "Manchester", "Mansfield", "Margate", "Middlesbrough", 
+        "Milford+Haven", "Milton+Keynes", "Motherwell", "Mullingar", "Neath", "Nelson", "Newbury", "Newcastle+upon+Tyne", "Newmarket",
+        "Newport", "Newport%28IoW%29", "Newtownards", "Northampton", "Norwich", "Nottingham", "Nuneaton", "Oldham", "Oxford", "Paisley",
+        "Penrith", "Perth", "Peterborough", "Plymouth", "Pontypridd", "Poole", "Port+Talbot", "PortLaoise", "Portsmouth", "Preston", "Purley",
+        "Radcliffe", "Reading", "Redditch", "Redhill", "Retford", "Rhyl", "Rochdale", "Rochester", "Rossendale", "Rotherham", "Rugby", 
+        "Salisbury", "Sandwell", "Scarborough", "Scunthorpe", "Sheerness", "Sheffield", "Shipley", "Shrewsbury", "Sittingbourne", "Skelmersdale",
+        "Skipton", "Slough", "Smethwick", "Solihull", "South+Shields", "Southampton", "Southend", "Southport", "St+Albans", "St+Annes-on-Sea",
+        "St+Helier", "St.+Helens", "Stafford", "Stevenage", "Stirling", "Stockport", "Stockton-on-Tees", "Stoke-on-Trent", "Stourbridge",
+        "Sunderland", "Sutton+Coldfield", "Swansea", "Swindon", "Tamworth", "Taunton", "Telford", "Thetford", "Todmorden", "Torquay", "Tralee",
+        "Trowbridge", "Truro", "Tuam", "Tunbridge+Wells", "Wakefield", "Walsall", "Warley", "Warrington", "Waterford", "Watford", "Wednesbury",
+        "Wellingborough", "Welwyn+Garden+City", "West+Bromwich", "Weston-super-Mare", "Weymouth", "Whitehaven", "Whitley+Bay", "Whitstable",
+        "Wigan", "Winchester", "Windsor", "Woking", "Wolverhampton", "Worcester", "Worthing", "Wrexham", "Yeovil", "York"]
+
+
+
+############################################
+Access the function of the "urllib" library
+############################################
+
+htmlfile = urllib.urlopen()     #the period '.' is used to indicate we are accessing a function of the library
+
+# Read the HTML file
+
+htmltext = htmlfile.read() #Convert into text
+
+
+#########################################
+      Create Iterator variable
+#########################################
+
+i=0  #iterator variable
+
+
+
+# Create WHILE loop
+
+while i<len(towns):   # This denotes: "When i is LESS than the length of towns (i.e. number of towns in vector)"
+  url = 'http://mosques.muslimsinbritain.org/show-browse.php?" +towns[i] +"=Barry&map=1#/town/" +towns[i] +"'
+  htmlfile = urllib.urlopen(url)
+  htmltext = htmlfile.read()
+  print htmltext
+  i=+1       #Increment 'i' after each request --> so the loop stops after the URL for the final town has been retrieved
+             # i.e. if we had three towns, this function would stop after three requests
+             # i.e. it tells the loop: is 1 town less than 3 = "Yes" | is 2 towns less than 3 = "Yes" | is 3 towns less than 3 = "No" | STOP
+             
+             
+#######################################
+ Regex Library
+#######################################
+
+regex = '<td>(.+?)</td>'       #(.+?) --> This means to get WHATEVER IS IN BETWEEN THE TWO TAGS i.e. <a>, <td>, <p>
+
+# Convert regex string into something that can be interpreted by the regular expressions library
+
+pattern = re.compile(regex)
+
+mosquedta = re.findall(pattern, htmltext)

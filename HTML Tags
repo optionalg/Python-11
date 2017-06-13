@@ -15,3 +15,15 @@
 <th>   - Headers in a HTML table
 
 <tr>   - Table row in a HTML table
+
+?      - Separation between the standard URL and the query string (i.e. the search term)
+
+&      - Separation of key value pairs
+
+=      - Separate the key and value i.e. page type = Homepages written as "pgtype=Homepage"
+
+q      - Query 
+       
+       - e.g. ?q=Stanford --> Return search results for Stanford
+       
+%20    - Space between search terms

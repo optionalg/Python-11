@@ -27,3 +27,6 @@ q      - Query
        - e.g. ?q=Stanford --> Return search results for Stanford
        
 %20    - Space between search terms
+
+&nbsp  - Non-breaking space i.e. a space that will NOT break into a new line
+                            e.g. Bold text = <strong> University-going population <\strong>&nbsp

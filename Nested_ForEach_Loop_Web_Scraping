@@ -127,7 +127,7 @@ for i in towns: # iterator variable = towns (i.e. town names)
 
 # Condensed Code #
 
-for i in towns: # iterator variable = towns (i.e. town names)
+for i in towns: 
     url = "http://www.mosquedirectory.co.uk/search_mosque/mosquesearch.php?mosque={}".format(i) 
     r = requests.get(url) 
     soup = bs.BeautifulSoup(r.content, 'lxml') 

@@ -1,0 +1,148 @@
+# Packages/Modules
+
+import bs4 as bs
+                # or "from bs4 import BeautifulSoup
+import urllib.request
+
+# Parsing Tables
+import pandas as pd
+#import pandas.io.data as web
+import requests
+
+# Import in .csv or Excel file
+import openpyxl
+from openpyxl import Workbook
+import xlwt
+
+# HTML Parser
+import lxml
+import html5lib # HTML parser
+
+
+# Create an array of URLS
+towns = ["London",
+ 			"Aberdeen",
+ 			"Angus", 
+ 			"Avon%20and%20Somerset",
+	 		"Bedfordshire",
+ 			"Berkshire",
+ 			"Buckinghamshire", 
+ 			"Cambridgeshire", 
+ 			"Carmarthenshire", 
+                        "Cheshire", 
+ 			"Cleveland", 
+ 			"Cornwall", 
+                        "Durham", 
+ 			"Ireland", 
+ 			"Cumbria",
+ 			"Derbyshire", 
+ 			"Devon", 
+ 			"Dorset", 
+ 			"Dumfries%20and%20Galloway", 
+ 			"Dyfed", 
+ 			"East%20Sussex",
+ 			"Essex",
+ 			"Falkirk",
+ 			"Fife",
+ 			"Glamorgan",
+ 			"Gloucestershire",
+ 			"Manchester",
+ 			"Gwent",
+ 			"Gwynedd",
+ 			"Hampshire",
+ 			"Hereford%20and%20Worcester",
+ 			"Hertfordshire",
+ 			"Highland",
+ 			"Douglas",
+ 			"Isle%20of%20Wight",
+ 			"Kent",
+ 			"Lancashire",
+ 			"Lincolnshire",
+ 			"Lothian",
+ 			"Merseyside",
+                        "Norfolk", 
+ 			"North%20Yorkshire", 
+ 			"Northamptonshire", 
+ 			"Northumberland", 
+ 			"Nottinghamshire", 
+ 			"Oxfordshire", 
+ 			"Perth%20and%20Kinross", 
+ 			"Shropshire", 
+ 			"South%20Yorkshire", 
+ 			"Staffordshire", 
+ 			"Stirling", 
+ 			"Suffolk", 
+ 			"Surrey", 
+ 			"Newcastle%20Upon%20Tyne", 
+ 			"Warwickshire", 
+ 			"West%20Lothian", 
+ 			"West%20Midlands", 
+ 			"West%20Yorkshire", 
+ 			"Wiltshire", 
+ 			"Wrexham", 
+ 			"County%20Armagh", 
+ 			"County%20Cavan", 
+ 			"West%20Waterford", 
+ 			"Kilmarnock", 
+ 			"Alloa", 
+ 			"Greater%20London", 
+ 			"Coleraine", 
+ 			"Somerset", 
+ 			"Moray", 
+ 			"Pembrokeshire"]
+
+print(towns)
+
+
+######################
+ NESTED FOREACH LOOP
+######################
+
+# (1) ForEach Loop 1- Retrieve Mosques for Each Town
+#                   - For each town, download information on all mosques 
+
+for i in towns: # iterator variable = towns (i.e. town names)
+    url = "http://www.mosquedirectory.co.uk/search_mosque/mosquesearch.php?mosque={}".format(i) # Store URL in vector 'url'
+                                                                                                # Returns the source code
+                                                                                                # '{}' are used to fill in a query (aka the placeholder)
+                                                                                                # format(i) --> Defines the iterator variable        
+
+    r = requests.get(url) # Request the URL from the url vector given above
+
+    soup = bs.BeautifulSoup(r.content, 'lxml') # Explicitly mention the parser = parser converts data into a data structure
+
+    mosque = soup.find_all('td') # find all of the HTML tags wanted i.e. 'td', 'h2, 'tr', 'tbody'
+
+    print(mosque) # Print all of the table data for all of the mosques from each town in the town array
+
+
+    # (2) ForEach Loop 2- Retrieve only text for each mosque in each town
+    #                   - For each mosque, only retrieve the text data
+    #                   - Remove HTML tags = Leave only text
+
+        for i in mosque: 
+            print(i.get_text())
+
+
+
+# Condensed Code #
+
+for i in towns: # iterator variable = towns (i.e. town names)
+    url = "http://www.mosquedirectory.co.uk/search_mosque/mosquesearch.php?mosque={}".format(i) 
+    r = requests.get(url) 
+    soup = bs.BeautifulSoup(r.content, 'lxml') 
+    mosque = soup.find_all('td') 
+    print(mosque)
+
+        for i in mosque: 
+            print(i.get_text())
+
+
+
+# Writing a list to a file
+
+# Open the file
+thefile = open('webscrape.txt', 'w')
+
+for item in mosque:
+    thefile.write("%s\n" % item)

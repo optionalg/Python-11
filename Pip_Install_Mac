@@ -1,0 +1,5 @@
+python3.6 -m pip install request 
+
+# With most recent upgrades
+
+python3.6 -m pip install nltk

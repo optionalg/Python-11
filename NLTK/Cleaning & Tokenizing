@@ -1,0 +1,165 @@
+import nltk
+from bs4 import BeautifulSoup
+import urllib.request
+import requests
+import re, os
+from nltk.tokenize import word_tokenize
+from nltk.tokenize import RegexpTokenizer
+from nltk.corpus import stopwords
+from nltk import PorterStemmer
+import lxml
+import html5lib
+from string import punctuation
+from collections import Counter # import Counter object from collections
+
+
+# Import Text Example | e.g. Writings of Dylan Klebold
+
+tex = open('S:\Python\Text_Files\Examples\dylan_klebold_online_entries.txt', 'r') # 'r' is used to make explicit that you want to read the file
+text = tex.read() # Read the contents of the text file into a variable 'text'
+print(text) # Print said variable
+
+
+#########################################
+#             TOKENIZING
+#########################################
+
+# Tokenizing Words
+
+words = word_tokenize(text) # Tokenize
+print(words)
+
+
+#######################################
+#           CLEANING DATA
+#######################################
+
+###############
+# PUNCTUATION
+###############
+
+# Remove Punctuation
+           # Search and Replace | Stripping HTML tags
+           # Replace all occurrences of the "regular expression" pattern in a specific string
+           # Remove all full stops, commas, question marks, ampersands, forwardslash
+        
+# Alternative Way of Removing Punctuation
+
+def remove_words(words, remove_words):
+	return [word for word in words if word not in remove_words]
+
+words_clean = remove_words(words, punctuation)
+print(words_clean)
+
+# if the word is in words, please return. If not, (and is punctuation), please do NOT return
+# if not punctuation, please return the word.
+# if punctuation, please exclude
+
+
+####################
+### CAPITALIZATION
+####################
+
+# Fixing Capitalization
+
+def lowercase(words): # define function name
+	return [word.lower() for word in words] # word.lower = "str.lower" with the string here being "word"
+
+lowercase(words_clean) # Put all the words that were returned above, into lowercase
+
+
+############
+# STOPWORDS
+############
+
+stops = stopwords.words('english')
+
+filtered_text = remove_words(words_clean, stops)
+
+#################
+# COUNTING WORDS
+#################
+
+counts = Counter(filtered_text) 
+
+sorted_counts = sorted(counts.items(), key=lambda count:  # Sorts the words based on REVERSE count 
+                      count[1], reverse=True)             # e.g. Largest to Smallest | Most Frequent to Least Frequent
+print(sorted_counts)
+
+
+
+
+
+
+
+
+########################################################################################################################################
+# ALTERNATIVE METHODS
+
+
+#########################################
+###           CLEANING DATA
+#########################################
+##
+###Removing Stopwords
+##
+##stop_words = set(stopwords.words("english"))   # Retrieve the set of stopwords from the English language
+##                                             # "set()" defines a set
+##print(stop_words) # Print list of stopwords
+##
+##
+### Remove Punctuation
+##            # Search and Replace | Stripping HTML tags
+##            # Replace all occurrences of the "regular expression" pattern in a specific string
+##            # Remove all full stops, commas, question marks, ampersands, forwardslash
+##            
+##text_cleaned = re.sub(r'[.,?&/“”]', "", text)    # r is used to show this is a regular expression string
+##                                               # [.,?&] will match any of the characters '.', ',', '?', '&'
+##                                               # "" replaces the period with nothing/blankspace
+##print(text_cleaned)
+##
+##
+### Removing Capitalization
+##
+##print(text_cleaned.lower())  # str..lower --> Where str refers to the named variable in which you've stored the text
+##
+##
+### Alternative Way of Removing Punctuation
+##
+###def remove_text(
+##
+##
+#########################################
+###             TOKENIZING
+#########################################
+##
+##
+### Tokenizing Words
+##
+##words = word_tokenize(text_cleaned) # Tokenize
+##
+### Filter the sentence
+##
+##filtered_sentence = [] # "[]" refers to an empty list
+##
+### Foreach Loop: Remove Stopwords and Return Non-Stopwords
+##
+##for i in words:
+##    if i not in stop_words:
+##       filtered_sentence.append(i) # Append "i" means put append i to the empty list we created above
+##                                   # for the filtered sentence
+##       print(filtered_sentence)
+##
+### Alternative Foreach Loop: Shorter Code
+##
+##filtered_sentence = [i for i in words if not i in stop_words]
+##           # For each word in words, if word is NOT in stopwords, then add it to the filtered sentence list
+##
+##print(filtered_sentence)
+
+
+
+
+
+
+

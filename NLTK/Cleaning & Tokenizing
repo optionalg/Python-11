@@ -65,7 +65,7 @@ print(words_clean)
 def lowercase(words): 					# define function name
 	return [word.lower() for word in words] 	# word.lower = "str.lower" with the string here being "word"
 
-lowercase(words_clean) # Put all the words that were returned above, into lowercase
+lowercase(words_clean) 					# Put all the words that were returned above, into lowercase
 
 
 ############

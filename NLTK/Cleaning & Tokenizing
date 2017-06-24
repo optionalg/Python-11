@@ -43,8 +43,7 @@ print(words)
            # Replace all occurrences of the "regular expression" pattern in a specific string
            # Remove all full stops, commas, question marks, ampersands, forwardslash
         
-# Alternative Way of Removing Punctuation
-
+	
 def remove_words(words, remove_words):
 	return [word for word in words if word not in remove_words]
 

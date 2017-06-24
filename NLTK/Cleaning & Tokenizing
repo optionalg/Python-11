@@ -26,7 +26,7 @@ print(text) # Print said variable
 
 # Tokenizing Words
 
-words = word_tokenize(text) # Tokenize
+words = word_tokenize(text) 
 print(words)
 
 

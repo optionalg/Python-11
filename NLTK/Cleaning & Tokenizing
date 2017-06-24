@@ -62,8 +62,8 @@ print(words_clean)
 
 # Fixing Capitalization
 
-def lowercase(words): # define function name
-	return [word.lower() for word in words] # word.lower = "str.lower" with the string here being "word"
+def lowercase(words): 					# define function name
+	return [word.lower() for word in words] 	# word.lower = "str.lower" with the string here being "word"
 
 lowercase(words_clean) # Put all the words that were returned above, into lowercase
 
@@ -76,14 +76,15 @@ stops = stopwords.words('english')
 
 filtered_text = remove_words(words_clean, stops)
 
+
 #################
 # COUNTING WORDS
 #################
 
 counts = Counter(filtered_text) 
 
-sorted_counts = sorted(counts.items(), key=lambda count:  # Sorts the words based on REVERSE count 
-                      count[1], reverse=True)             # e.g. Largest to Smallest | Most Frequent to Least Frequent
+sorted_counts = sorted(counts.items(), key=lambda count:  	# Sorts the words based on REVERSE count 
+                      count[1], reverse=True)             	# e.g. Largest to Smallest | Most Frequent to Least Frequent
 print(sorted_counts)
 
 

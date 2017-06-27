@@ -1,0 +1,44 @@
+import bs4 as bs
+import urllib.request
+import pandas as pd
+#import pandas.io.data as web
+import requests
+import openpyxl
+from openpyxl import Workbook
+import xlwt
+import lxml
+import html5lib
+import urllib.error
+from urllib.error import HTTPError, URLError
+
+# Create variable with range of unique pages numbers
+        # Assign a range to a variable
+
+pages = range(4000,9000)
+print(list(pages))
+
+# NESTED FOREACH LOOP
+
+for i in list(pages):
+    url = "http://khutbahbank.org.uk/v2/?p={}".format(i)
+    r = requests.get(url)
+    soup = bs.BeautifulSoup(r.content, 'lxml')
+    sermon = soup.find_all('div', class_='entry-content')
+  
+    for i in sermon: 
+        print(i.get_text())                                 # Just print the text 
+
+        # Writing all of the sermons to one file 
+        outfile = open('sermon.txt', 'a', encoding='utf-8') # Better to use append ('a')
+                                                            # Encoding: open file with specific encoding
+                                                            # that can handle ALL characters
+        outfile.write(i.get_text())
+        outfile.close()
+
+
+
+            
+
+
+    
+
